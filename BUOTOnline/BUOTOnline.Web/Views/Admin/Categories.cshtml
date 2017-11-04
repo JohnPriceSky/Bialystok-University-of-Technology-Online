@@ -1,0 +1,16 @@
+﻿@model System.Collections.Generic.IEnumerable<BUOTOnline.Web.ViewModels.CategoryViewModel>
+
+@{
+    ViewBag.Title = "Categories";
+}
+
+<h2>Categories</h2>
+
+<ul class="list-group">
+    @foreach (var category in Model)
+    {
+        <li class="list-group-item">@category.Name</li>
+    }
+</ul>
+
+<div>@Html.ActionLink("Add", "AddCategory", "Admin", null, new { @class = "btn btn-success btn-lg glyphicon glyphicon-plus" })</div>

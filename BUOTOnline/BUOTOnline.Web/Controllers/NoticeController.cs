@@ -35,5 +35,10 @@ namespace BUOTOnline.Web.Controllers
 
             return View();
         }
+
+        public ActionResult AddButton()
+        {
+            return PartialView("~/Views/Notice/_AddButton.cshtml");
+        }
     }
 }
