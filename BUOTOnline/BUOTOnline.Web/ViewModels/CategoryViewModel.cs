@@ -10,6 +10,8 @@ namespace BUOTOnline.Web.ViewModels
         public long Id { get; set; }
         public string Name { get; set; }
         public long ParentId { get; set; }
+        public IEnumerable<long> AttributeIds { get; set; }
+        public IEnumerable<CategoryViewModel> Parents { get; set; }
         public IEnumerable<AttributeViewModel> Attributes { get; set; }
     }
 }
