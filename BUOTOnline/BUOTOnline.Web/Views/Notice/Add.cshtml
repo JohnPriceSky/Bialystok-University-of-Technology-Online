@@ -14,6 +14,12 @@
         <h4>NoticeViewModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        @*@Html.DropDownListFor(m => m.Text, selectList, "Default label", new { @class = "form-control" })*@
+        @*@Html.DropDownList(model => model.Title, CategoryList, "Select a category")*@
+       
+
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -32,7 +38,7 @@
 
       
         <div>
-            @ViewBag.Msg;
+            @ViewBag.Msg
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

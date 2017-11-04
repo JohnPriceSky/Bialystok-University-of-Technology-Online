@@ -26,7 +26,7 @@ namespace BUOTOnline.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                ViewBag.Msg = $"Category: {notice.Cat}, Title: {notice.Title}, Description: {notice.Description}, Created: {notice.Created}";
+                ViewBag.Msg = $"Title: {notice.Title}, Description: {notice.Description}, Created: {notice.Created}";
             }
             else
             {
