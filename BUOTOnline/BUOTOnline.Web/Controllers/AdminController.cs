@@ -66,7 +66,7 @@ namespace BUOTOnline.Web.Controllers
                         new AttributeViewModel { Id = 1, Name = "Title", Type = AttributeType.Shorttext },
                         new AttributeViewModel { Id = 2, Name = "Descrition", Type = AttributeType.Longtext }
                     }
-                },
+                }
             };
 
             return View(categories);
@@ -79,7 +79,27 @@ namespace BUOTOnline.Web.Controllers
 
         public ActionResult AddCategory()
         {
-            return View();
+            var category = new CategoryViewModel
+            {
+                Parents = new List<CategoryViewModel>
+                {
+                    new CategoryViewModel { Id = 1, Name = "Vehicles", ParentId = 0 },
+                    new CategoryViewModel { Id = 2, Name = "Tank", ParentId = 1 },
+                    new CategoryViewModel {  Id = 3, Name = "Car", ParentId = 1 },
+                    new CategoryViewModel { Id = 4, Name = "Sedan", ParentId = 2 },
+                    new CategoryViewModel { Id = 5, Name = "Combi", ParentId = 2 },
+                    new CategoryViewModel { Id = 6, Name = "Food", ParentId = 0 }
+                },
+                Attributes = new List<AttributeViewModel>
+                {
+                    new AttributeViewModel { Id = 1, Name = "Title", Type = AttributeType.Shorttext },
+                    new AttributeViewModel { Id = 2, Name = "Descrition", Type = AttributeType.Longtext },
+                    new AttributeViewModel { Id = 3, Name = "SecondHand", Type = AttributeType.Bool },
+                    new AttributeViewModel { Id = 4, Name = "Age", Type = AttributeType.Int }
+                }
+            };
+
+            return View(category);
         }
     }
 }
