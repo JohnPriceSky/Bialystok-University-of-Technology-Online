@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BUOTOnline.Web.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,8 +15,24 @@ namespace BUOTOnline.Web.Controllers
             return View();
         }
 
+
         public ActionResult Add()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Add(NoticeViewModel notice)
+        {
+            if (ModelState.IsValid)
+            {
+                ViewBag.Msg = $"Title: {notice.Title}, Description: {notice.Description}, Created: {notice.Created}";
+            }
+            else
+            {
+                ViewBag.Msg = "Błędne dane.";
+            }
+
             return View();
         }
 
