@@ -13,4 +13,5 @@
     }
 </ul>
 
-<div>@Html.ActionLink("Add", "AddCategory", "Admin", null, new { @class = "btn btn-success btn-lg glyphicon glyphicon-plus" })</div>
+<a href="@Url.Action("AddCategory", "Admin")" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i> Add new category</a>
+@*<div>@Html.ActionLink("Add", "AddCategory", "Admin", null, new { @class = "btn btn-success btn-lg glyphicon glyphicon-plus" })</div>*@

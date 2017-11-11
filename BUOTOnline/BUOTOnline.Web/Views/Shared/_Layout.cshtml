@@ -25,7 +25,12 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("AdminPanel", "Index", "Admin")</li>
-                    <li>@{ Html.RenderAction("AddButton", "Notice"); }</li>
+                    <li>
+                        <p class="navbar-btn">
+                            <a href="@Url.Action("Add", "Notice")" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i> Add new notice</a>
+                        </p>
+                    </li>
+                    @*<li>@{ Html.RenderAction("AddButton", "Notice"); }</li>*@
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
