@@ -18,7 +18,7 @@ namespace BUOTOnline.Web.ViewModels
         [StringLength(255, MinimumLength = 10, ErrorMessage = "Opis musi mieć minimum 10 znaków!")]
         public string Description { get; set; }
 
-        public DateTime Created { get; private set; } = DateTime.Now;
+        public DateTime Created { get; set; } = DateTime.Now;
         public IEnumerable<CategoryViewModel> Categories { get; set; }
 
         //public int[] CategoryId { get; set; }

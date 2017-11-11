@@ -1,28 +1,33 @@
-﻿@{
+﻿@model System.Collections.Generic.IEnumerable<BUOTOnline.Web.ViewModels.NoticeViewModel>
+@{
     ViewBag.Title = "Home Page";
 }
 
 <div class="jumbotron jumbotron-fluid">
     <div class="row">
-        <div class="col-md-4">
-            
-        </div>
 
+        <!-- Category dropdown -->
         <div class="col-md-4">
+            Retarded multiple dropdown
             <select multiple>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="opel">Opel</option>
-                <option value="audi">Audi</option>
+                <option value="moto">Motoryzacja</option>
+                <option value="electronics">Elektronika</option>
+                <option value="job">Praca</option>
             </select>
         </div>
 
+        <!-- tags -->
+        <div class="col-md-4">
+            Tags here
+        </div>
+
+        <!-- search input -->
         <div class="col-md-4">
             <form action="" class="navbar-form navbar-right">
                 <div class="input-group">
                     <input type="Search" placeholder="Search..." class="form-control" />
                     <div class="input-group-btn">
-                        <button class="btn btn-info">
+                        <button class="btn btn-success">
                             <span class="glyphicon glyphicon-search"></span>
                         </button>
                     </div>
@@ -33,17 +38,38 @@
     
 </div>
 
-<div class="row">
-    <div class="col-md-12">
-       <div class="row">
-           <div class="col-sm-3">
-               <img src="http://autofrajda.pl/uploads/1412/41.jpg" class="img-responsive" />
-           </div>
-           <div class="col-sm-9">
-               <h3 style="margin-top: 0px;">Passat HIT</h3>
-               <h6 style="font-style: italic;">Motoryzacja</h6>
-           </div>
-       </div>
+
+@foreach (var notice in Model)
+{
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-3">
+                    <img src="http://autofrajda.pl/uploads/1412/41.jpg" class="img-responsive" />
+                </div>
+                <div class="col-sm-9">
+                    <h3 style="margin-top: 0px;">@notice.Title</h3>
+                    <h6 style="font-style: italic;">@notice.Created</h6>
+                    <h6>@notice.Description</h6>
+                </div>
+            </div>
+        </div>
     </div>
-    
-</div>
+    @*<div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-sm-3">
+                    <img src="http://autofrajda.pl/uploads/1412/41.jpg" class="img-responsive" />
+                </div>
+                <div class="col-sm-9">
+                    <h3 style="margin-top: 0px;">@notice.Title</h3>
+                    <h6 style="font-style: italic;">@notice.Created</h6>
+                    <h6>@notice.Description</h6>
+                </div>
+            </div>
+        </div>
+    </div>*@
+}
+
+
