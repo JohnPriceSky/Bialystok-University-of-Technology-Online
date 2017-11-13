@@ -9,7 +9,12 @@
 <ul class="list-group">
     @foreach (var category in Model)
     {
-        <li class="list-group-item">@category.Name</li>
+        <li class="list-group-item">
+            <p style="float: left">@category.Name</p>
+            <div style="float: right; padding-left: 2px">@Html.ActionLink("Remove", "Category", "Admin", null, new { @class = "btn btn-danger glyphicon glyphicon-minus" })</div>
+            <div style="float: right">@Html.ActionLink("Edit", "Category", "Admin", null, new { @class = "btn btn-primary glyphicon glyphicon-edit" })</div>
+            <div style="clear: both" />
+        </li>
     }
 </ul>
 
