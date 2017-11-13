@@ -3,17 +3,18 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron jumbotron-fluid">
+<div class="jumbotron">
     <div class="row">
-
         <!-- Category dropdown -->
         <div class="col-md-4">
-            Retarded multiple dropdown
-            <select multiple>
-                <option value="moto">Motoryzacja</option>
-                <option value="electronics">Elektronika</option>
-                <option value="job">Praca</option>
-            </select>
+            <div class="form-group">
+                <label for="sel1">Category list:</label>
+                <select class="form-control" id="categoryList">
+                    <option value="moto">Motoryzacja</option>
+                    <option value="electronics">Elektronika</option>
+                    <option value="job">Praca</option>
+                </select>
+            </div>
         </div>
 
         <!-- tags -->
@@ -41,7 +42,6 @@
 
 @foreach (var notice in Model)
 {
-
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
@@ -56,20 +56,6 @@
             </div>
         </div>
     </div>
-    @*<div class="row">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-sm-3">
-                    <img src="http://autofrajda.pl/uploads/1412/41.jpg" class="img-responsive" />
-                </div>
-                <div class="col-sm-9">
-                    <h3 style="margin-top: 0px;">@notice.Title</h3>
-                    <h6 style="font-style: italic;">@notice.Created</h6>
-                    <h6>@notice.Description</h6>
-                </div>
-            </div>
-        </div>
-    </div>*@
 }
 
 
