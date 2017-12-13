@@ -1,11 +1,63 @@
-﻿@{
+﻿@model System.Collections.Generic.IEnumerable<BUOTOnline.Web.ViewModels.NoticeViewModel>
+@{
     ViewBag.Title = "Home Page";
 }
 
+<div class="jumbotron">
+    <div class="row">
+        <!-- Category dropdown -->
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="sel1">Category list:</label>
+                <select class="form-control" id="categoryList">
+                    <option value="moto">Motoryzacja</option>
+                    <option value="electronics">Elektronika</option>
+                    <option value="job">Praca</option>
+                </select>
+            </div>
+        </div>
 <div ng-controller="homeController">
     <input ng-model="test" /> {{test}}
 </div>
 
-@section scripts {
-    @Scripts.Render("~/bundles/homeController")    
+        <!-- tags -->
+        <div class="col-md-4">
+            Tags here
+        </div>
+
+        <!-- search input -->
+        <div class="col-md-4">
+            <form action="" class="navbar-form navbar-right">
+                <div class="input-group">
+                    <input type="Search" placeholder="Search..." class="form-control" />
+                    <div class="input-group-btn">
+                        <button class="btn btn-success">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+</div>
+
+
+@foreach (var notice in Model)
+{
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-3">
+                    <img src="http://autofrajda.pl/uploads/1412/41.jpg" class="img-responsive" />
+                </div>
+                <div class="col-sm-9">
+                    <h3 style="margin-top: 0px;">@notice.Title</h3>
+                    <h6 style="font-style: italic;">@notice.Created</h6>
+                    <h6>@notice.Description</h6>
+                </div>
+            </div>
+        </div>
+    </div>
 }
+

@@ -6,16 +6,16 @@
 
 <h2>Categories</h2>
 
-<ul class="list-group">
+<ul class="list-group" style="text-align: right;">
     @foreach (var category in Model)
     {
         <li class="list-group-item">
-            <p style="float: left">@category.Name</p>
-            <div style="float: right; padding-left: 2px">@Html.ActionLink("Remove", "Category", "Admin", null, new { @class = "btn btn-danger glyphicon glyphicon-minus" })</div>
-            <div style="float: right">@Html.ActionLink("Edit", "Category", "Admin", null, new { @class = "btn btn-primary glyphicon glyphicon-edit" })</div>
-            <div style="clear: both" />
+            <p style="float: left;">@category.Name</p>
+            <a href="@Url.Action("EditCategory", "Admin")" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+            <a href="@Url.Action("RemoveCategory", "Admin")" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-minus-sign"></i> Remove</a>
         </li>
     }
 </ul>
 
-<div>@Html.ActionLink("Add", "AddCategory", "Admin", null, new { @class = "btn btn-success btn-lg glyphicon glyphicon-plus" })</div>
+<a href="@Url.Action("AddCategory", "Admin")" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i> Add new category</a>
+@*<div>@Html.ActionLink("Add", "AddCategory", "Admin", null, new { @class = "btn btn-success btn-lg glyphicon glyphicon-plus" })</div>*@

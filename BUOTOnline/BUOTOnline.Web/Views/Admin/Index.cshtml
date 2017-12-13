@@ -5,4 +5,5 @@
 
 <h2>Index</h2>
 
-<div>@Html.ActionLink("Categories", "Categories", "Admin", null, new { @class = "btn btn-success btn-lg glyphicon glyphicon-th-list" })</div>
+@*<div>@Html.ActionLink("Categories", "Categories", "Admin", null, new { @class = "btn btn-success btn-l" })</div>*@
+<a href="@Url.Action("Categories", "Admin")" class="btn btn-success"><i class="glyphicon glyphicon-th-list"></i> Categories</a>
