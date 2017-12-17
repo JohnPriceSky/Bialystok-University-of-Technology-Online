@@ -1,4 +1,4 @@
-﻿namespace BUOTOnline.Web.ViewModels
+﻿namespace BUOTOnline.DAL.ViewModels
 {
     public class AttributeViewModel
     {

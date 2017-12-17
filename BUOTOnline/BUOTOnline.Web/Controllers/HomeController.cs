@@ -1,4 +1,4 @@
-﻿using BUOTOnline.Web.ViewModels;
+﻿using BUOTOnline.DAL.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
