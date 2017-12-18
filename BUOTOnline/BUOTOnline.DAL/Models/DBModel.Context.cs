@@ -13,9 +13,9 @@ namespace BUOTOnline.DAL.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BUOTOnline : DbContext
+    public partial class BUOTOdb : DbContext
     {
-        public BUOTOnline()
+        public BUOTOdb()
             : base("name=BUOTOnline")
         {
         }
@@ -25,6 +25,7 @@ namespace BUOTOnline.DAL.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Attribute> Attribute { get; set; }
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Notice> Notice { get; set; }
     }

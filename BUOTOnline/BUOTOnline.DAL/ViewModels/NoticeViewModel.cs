@@ -9,7 +9,9 @@ namespace BUOTOnline.DAL.ViewModels
     {
         [Display(Name = "Title")]
         [Required]
-        public string Title { get; set; } 
+        public string Title { get; set; }
+
+        public string ImageUrl { get; set; }
 
         [Required]
         [StringLength(255, MinimumLength = 10, ErrorMessage = "Opis musi mieć minimum 10 znaków!")]

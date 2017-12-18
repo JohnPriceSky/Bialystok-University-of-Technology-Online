@@ -73,6 +73,9 @@
     <Compile Include="Enums\AttributeType.cs" />
     <Compile Include="IServices\ICategoryService.cs" />
     <Compile Include="IServices\INoticeService.cs" />
+    <Compile Include="Models\Attribute.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Category.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>

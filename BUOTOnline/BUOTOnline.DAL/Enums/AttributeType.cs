@@ -1,6 +1,6 @@
 ﻿namespace BUOTOnline.DAL
 {
-    public enum AttributeType
+    public enum AttributeType : byte
     {
         Shorttext = 0,
         Longtext = 1,
