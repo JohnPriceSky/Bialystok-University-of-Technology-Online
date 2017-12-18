@@ -11,6 +11,10 @@ namespace BUOTOnline.DAL.Modules
             builder.RegisterType<CategoryService>()
                 .As<ICategoryService>()
                 .InstancePerLifetimeScope();
+
+            builder.RegisterType<NoticeService>()
+                .As<INoticeService>()
+                .InstancePerLifetimeScope();
         }
     }
 }

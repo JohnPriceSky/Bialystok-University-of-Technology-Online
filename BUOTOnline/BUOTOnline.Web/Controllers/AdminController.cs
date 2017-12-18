@@ -19,10 +19,7 @@ namespace BUOTOnline.Web.Controllers
         }
 
         // GET: Admin
-        public ActionResult Index()
-        {
-            return View();
-        }
+        public ActionResult Index() => View();
 
         public ActionResult Categories() => View(_categoryService.GetCategories());
 
@@ -39,7 +36,7 @@ namespace BUOTOnline.Web.Controllers
                 {
                     new CategoryViewModel { Id = 1, Name = "Vehicles", ParentId = 0 },
                     new CategoryViewModel { Id = 2, Name = "Tank", ParentId = 1 },
-                    new CategoryViewModel {  Id = 3, Name = "Car", ParentId = 1 },
+                    new CategoryViewModel { Id = 3, Name = "Car", ParentId = 1 },
                     new CategoryViewModel { Id = 4, Name = "Sedan", ParentId = 2 },
                     new CategoryViewModel { Id = 5, Name = "Combi", ParentId = 2 },
                     new CategoryViewModel { Id = 6, Name = "Food", ParentId = 0 }
