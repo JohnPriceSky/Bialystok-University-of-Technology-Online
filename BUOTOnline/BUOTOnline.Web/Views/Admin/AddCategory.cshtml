@@ -10,12 +10,11 @@
 
 <h2>AddCategory</h2>
 <div ng-controller="adminController">
-    {{test}}
     @using (Html.BeginForm("AddCategory", "Admin", FormMethod.Post))
     {
         <div class="form-group">
             @Html.LabelFor(m => m.Name, "Name:")
-            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", ng_model = "test" })
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
         </div>
 
         <div class="form-group">
@@ -26,8 +25,32 @@
                 htmlAttributes: new { @class = "form-control", ng_model = "parentId", ng_change = "getInheritedAttributes()" })
         </div>
 
-        @Html.HiddenFor(m => m.AttributeIds, new { ng_value = "{{attrs}}" })
+        @Html.HiddenFor(m => m.AttributeIds)
 
+        <div ng-if="inheritedAttributes">
+            <h3>Inherited Attributes:</h3>
+            <ul>
+                <li ng-repeat="attr in inheritedAttributes">{{attr.name}}</li>
+            </ul>
+        </div>
+
+        <div class="form-inline">
+            <label>Add attribute: </label><br />
+            <select ng-model="addedAttr" ng-options="attr as attr.name for attr in attributes" class="form-control"></select>
+            <a ng-click="addAttribute()" class="btn btn-success btn-sm">Add</a>
+        </div>
+
+        <div ng-if="addedAttrs.length > 0">
+            <h3>Attributes:</h3>
+            <ul>
+                <li ng-repeat="attr in addedAttrs">
+                    {{attr.name}}
+                    <a ng-click="removeAttribute(attr)" style="color:red;cursor:pointer;">[X]</a>
+                </li>
+            </ul>
+        </div>
+
+        <br />
         <input value="Add" type="submit" class="btn btn-success" />
     }
 </div>

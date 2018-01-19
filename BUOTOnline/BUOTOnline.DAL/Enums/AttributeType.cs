@@ -6,6 +6,7 @@
         Longtext = 1,
         Int = 2,
         Real = 3,
-        Bool = 4
+        Bool = 4,
+        State = 5
     }
 }

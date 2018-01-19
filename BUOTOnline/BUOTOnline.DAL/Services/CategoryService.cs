@@ -28,6 +28,18 @@ namespace BUOTOnline.DAL.Services
                 .ToList();
         }
 
+        public IEnumerable<AttributeViewModel> GetAttributes()
+        {
+            return _buotDb.Attribute.AsNoTracking()
+                .Select(a => new AttributeViewModel
+                {
+                    Id = a.Id,
+                    Name = a.Name,
+                    Type = a.Type
+                })
+                .ToList();
+        }
+
         public void GetInheritedCategories(long categoryId, ref List<CategoryViewModel> categories)
         {
             var parenCategory = _buotDb.Category.AsNoTracking()
@@ -46,33 +58,50 @@ namespace BUOTOnline.DAL.Services
             }
         }
 
-        public IEnumerable<AttributeViewModel> GetInheritedAttributes(long categoryId)
+        public void GetCategoryAttributes(long categoryId, ref List<AttributeViewModel> attributes)
         {
-            throw new System.NotImplementedException();
-        }
+            var category = _buotDb.Category.AsNoTracking()
+                .FirstOrDefault(c => c.Id == categoryId);
+            if (category.ParentId.HasValue)
+            {
+                GetCategoryAttributes(category.ParentId.Value, ref attributes);
+            }
 
-        public IEnumerable<AttributeViewModel> GetCategoryAttributes(long categoryId)
-        {
-            throw new System.NotImplementedException();
+            foreach (var attribute in category.Attribute)
+                attributes.Add(new AttributeViewModel
+                {
+                    Id = attribute.Id,
+                    Name = attribute.Name,
+                    Type = attribute.Type
+                });
         }
 
         public void AddCategory(CategoryViewModel category)
         {
             var attributesIds = GetAttributesIds(category.AttributeIds);
 
-            var attributes = _buotDb.Attribute.AsNoTracking()
+            var attributes = _buotDb.Attribute
                 .Join(inner: attributesIds,
                     outerKeySelector: a => a.Id,
                     innerKeySelector: id => id,
                     resultSelector: (a, id) => a)
-                .ToList();
+                    .ToList();
 
-            _buotDb.Category.Add(new Category
+            var newCategory = new Category
             {
                 Name = category.Name,
-                ParentId = category.ParentId,
-                Attribute = attributes
-            });
+            };
+
+            if (category.ParentId > 0)
+                newCategory.ParentId = category.ParentId;
+
+            foreach (var attribute in attributes)
+                newCategory.Attribute.Add(attribute);
+
+            if (attributes.Count > 0)
+                newCategory.Attribute = attributes;
+
+                _buotDb.Category.Add(newCategory);
             _buotDb.SaveChanges();
         }
 
@@ -92,7 +121,7 @@ namespace BUOTOnline.DAL.Services
             _buotDb.SaveChanges();
         }
 
-        private IEnumerable<long> GetAttributesIds(string attributeIds)
-            => attributeIds.Split(',').Select(id => long.Parse(id));
+        private List<long> GetAttributesIds(string attributeIds)
+            => attributeIds.Split(',').Select(id => long.Parse(id)).ToList();
     }
 }

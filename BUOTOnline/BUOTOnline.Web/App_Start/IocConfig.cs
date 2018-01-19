@@ -1,8 +1,10 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
+using Autofac.Integration.WebApi;
 using BUOTOnline.DAL.Modules;
 using BUOTOnline.Web.Models;
 using System.Reflection;
+using System.Web.Http;
 using System.Web.Mvc;
 
 namespace BUOTOnline.Web.App_Start
@@ -15,11 +17,16 @@ namespace BUOTOnline.Web.App_Start
 
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
 
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+
             builder.RegisterModule<ServiceModule>();
 
             builder.RegisterType<ApplicationDbContext>().AsSelf().InstancePerRequest();
 
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(builder.Build()));
+            var container = builder.Build();
+
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+            GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
         }
     }
 }
