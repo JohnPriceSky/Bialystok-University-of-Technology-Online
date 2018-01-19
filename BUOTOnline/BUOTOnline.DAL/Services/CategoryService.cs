@@ -40,6 +40,27 @@ namespace BUOTOnline.DAL.Services
                 .ToList();
         }
 
+        public CategoryViewModel GetCategory(long categoryId)
+        {
+            var attributes = _buotDb.Category.AsNoTracking()
+                .Where(c => c.Id == categoryId)
+                .SelectMany(c => c.Attribute)
+                .Select(a => a.Id)
+                .ToArray();
+
+            var attributesIds = String.Join(",", attributes);
+
+            return _buotDb.Category.AsNoTracking()
+                .Select(c => new CategoryViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    ParentId = c.ParentId,
+                    AttributeIds = attributesIds
+                })
+                .FirstOrDefault(c => c.Id == categoryId);
+        }
+
         public void GetInheritedCategories(long categoryId, ref List<CategoryViewModel> categories)
         {
             var parenCategory = _buotDb.Category.AsNoTracking()
@@ -95,13 +116,45 @@ namespace BUOTOnline.DAL.Services
             if (category.ParentId > 0)
                 newCategory.ParentId = category.ParentId;
 
-            foreach (var attribute in attributes)
-                newCategory.Attribute.Add(attribute);
-
             if (attributes.Count > 0)
                 newCategory.Attribute = attributes;
 
                 _buotDb.Category.Add(newCategory);
+            _buotDb.SaveChanges();
+        }
+
+        public void EditCategory(CategoryViewModel category)
+        {
+            var attributesIds = GetAttributesIds(category.AttributeIds);
+
+            var attributes = _buotDb.Attribute
+                .Join(inner: attributesIds,
+                    outerKeySelector: a => a.Id,
+                    innerKeySelector: id => id,
+                    resultSelector: (a, id) => a)
+                    .ToList();
+
+            var dbCategory = _buotDb.Category.FirstOrDefault(c => c.Id == category.Id);
+            if (!dbCategory.Name.Equals(category.Name, StringComparison.InvariantCultureIgnoreCase))
+                dbCategory.Name = category.Name;
+
+            if (dbCategory.ParentId != category.ParentId)
+                dbCategory.ParentId = category.ParentId;
+
+            var dbAttributes = dbCategory.Attribute.ToList();
+
+            foreach (var attribute in dbAttributes)
+            {
+                if (!attributes.Contains(attribute))
+                    dbCategory.Attribute.Remove(attribute);
+            }
+
+            foreach (var attribute in attributes)
+            {
+                if (!dbAttributes.Contains(attribute))
+                    dbCategory.Attribute.Add(attribute);
+            }
+
             _buotDb.SaveChanges();
         }
 

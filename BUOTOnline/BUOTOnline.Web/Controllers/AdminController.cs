@@ -51,7 +51,18 @@ namespace BUOTOnline.Web.Controllers
 
         public ActionResult EditCategory(long id)
         {
-            return View();
+            var category = _categoryService.GetCategory(id);
+            category.Parents = _categoryService.GetCategories();
+
+            return View(category);
+        }
+
+        [HttpPost]
+        public ActionResult EditCategory(CategoryViewModel category)
+        {
+            _categoryService.EditCategory(category);
+
+            return RedirectToAction("Categories");
         }
 
         public ActionResult DeleteCategory(long id)

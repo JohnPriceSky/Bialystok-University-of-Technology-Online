@@ -2,6 +2,20 @@
 
     $http.get('/api/attributes').then(function (result) {
         $scope.attributes = result.data;
+
+        if ($('#AttributeIds').val()) {
+            $scope.attrs = $('#AttributeIds').val().split(',');
+            for(i = 0; i < $scope.attrs.length; i++)
+                $scope.attrs[i] = Number($scope.attrs[i])
+
+            for (i = 0; i < $scope.attrs.length; i++)
+                for (j = 0; j < $scope.attributes.length; j++)
+                    if ($scope.attrs[i] == $scope.attributes[j].id)
+                        $scope.addedAttrs.push($scope.attributes[j]);
+        }
+
+        if ($scope.parentId > 0)
+            $scope.getInheritedAttributes();
     });
 
     $scope.getInheritedAttributes = function () {

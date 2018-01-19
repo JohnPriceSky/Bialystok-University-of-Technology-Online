@@ -1,7 +1,58 @@
-﻿
+﻿@model BUOTOnline.DAL.ViewModels.CategoryViewModel
+
 @{
-    ViewBag.Title = "EditCategory";
+    ViewBag.Title = "Edit Category";
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/adminController");
 }
 
 <h2>Edit Category</h2>
 
+<div ng-controller="adminController">
+    @using (Html.BeginForm("EditCategory", "Admin", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.Name, "Name:")
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.ParentId, "Parent:")
+            @Html.DropDownListFor(expression: m => m.ParentId,
+                selectList: new SelectList(Model.Parents, "Id", "Name"),
+                optionLabel: "No Parent",
+                htmlAttributes: new { @class = "form-control", ng_model = "parentId", ng_change = "getInheritedAttributes()", ng_init = $"parentId = '{Model.ParentId}'" })
+        </div>
+
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.AttributeIds)
+
+        <div ng-if="inheritedAttributes">
+            <h3>Inherited Attributes:</h3>
+            <ul>
+                <li ng-repeat="attr in inheritedAttributes">{{attr.name}}</li>
+            </ul>
+        </div>
+
+        <div class="form-inline">
+            <label>Add attribute: </label><br />
+            <select ng-model="addedAttr" ng-options="attr as attr.name for attr in attributes" class="form-control"></select>
+            <a ng-click="addAttribute()" class="btn btn-success btn-sm">Add</a>
+        </div>
+
+        <div ng-if="addedAttrs.length > 0">
+            <h3>Attributes:</h3>
+            <ul>
+                <li ng-repeat="attr in addedAttrs">
+                    {{attr.name}}
+                    <a ng-click="removeAttribute(attr)" style="color:red;cursor:pointer;">[X]</a>
+                </li>
+            </ul>
+        </div>
+
+        <br />
+        <input value="Edit" type="submit" class="btn btn-primary" />
+    }
+</div>
