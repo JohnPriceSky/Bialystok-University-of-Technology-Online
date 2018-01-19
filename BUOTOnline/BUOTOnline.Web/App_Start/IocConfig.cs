@@ -1,11 +1,8 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
 using BUOTOnline.DAL.Modules;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using BUOTOnline.Web.Models;
 using System.Reflection;
-using System.Web;
 using System.Web.Mvc;
 
 namespace BUOTOnline.Web.App_Start
@@ -19,6 +16,8 @@ namespace BUOTOnline.Web.App_Start
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
 
             builder.RegisterModule<ServiceModule>();
+
+            builder.RegisterType<ApplicationDbContext>().AsSelf().InstancePerRequest();
 
             DependencyResolver.SetResolver(new AutofacDependencyResolver(builder.Build()));
         }

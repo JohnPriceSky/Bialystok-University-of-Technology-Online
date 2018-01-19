@@ -18,6 +18,9 @@ namespace BUOTOnline.Web
             bundles.Add(new ScriptBundle("~/bundles/homeController").Include(
                         "~/Scripts/app/controllers/homeController.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/adminController").Include(
+                        "~/Scripts/app/controllers/adminController.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 

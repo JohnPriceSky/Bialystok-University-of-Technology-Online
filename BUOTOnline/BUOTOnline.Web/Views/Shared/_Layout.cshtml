@@ -17,20 +17,22 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Bialystok University of Technology  Online", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("AdminPanel", "Index", "Admin")</li>
-                    <li>
-                        <p class="navbar-btn">
-                            <a href="@Url.Action("Add", "Notice")" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i> Add new notice</a>
-                        </p>
-                    </li>
-                    @*<li>@{ Html.RenderAction("AddButton", "Notice"); }</li>*@
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Administration Panel", "Index", "Admin")</li>
+                    }
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>
+                            <p class="navbar-btn">
+                                <a href="@Url.Action("Add", "Notice")" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i> Add new notice</a>
+                            </p>
+                        </li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

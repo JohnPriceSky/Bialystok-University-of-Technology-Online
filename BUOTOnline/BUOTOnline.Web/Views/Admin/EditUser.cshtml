@@ -1,0 +1,30 @@
+﻿@model BUOTOnline.Web.Models.UserViewModel
+
+@{
+    ViewBag.Title = "Edit User";
+}
+
+<h2>Edit User: @Model.Email</h2>
+
+@using (Html.BeginForm("UpdateUser", "Admin", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.Id)
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.UserName, "User name:")
+        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.PhoneNumber, "Phone number:")
+        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Role, "Role:")
+        @Html.DropDownListFor(m => m.Role, new SelectList(Model.Roles), "", new { @class = "form-control" })
+    </div>
+
+    <a href="@Url.Action("UsersManagement", "Admin")" class="btn btn-primary">Cancel</a>
+    <input value="Save" type="submit" class="btn btn-success" />
+}

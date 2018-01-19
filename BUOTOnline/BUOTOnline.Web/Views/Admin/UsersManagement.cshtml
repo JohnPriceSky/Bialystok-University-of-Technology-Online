@@ -1,0 +1,33 @@
+﻿@model System.Collections.Generic.IEnumerable<BUOTOnline.Web.Models.UserViewModel>
+
+@{
+    ViewBag.Title = "Users Management";
+}
+
+<h2>Users Management</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Phone number</th>
+            <th>User name</th>
+            <th>Role</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Email</td>
+                <td>@user.PhoneNumber</td>
+                <td>@user.UserName</td>
+                <td>@user.Role</td>
+                <td>
+                    <a href="@Url.Action("EditUser", "Admin", new { id = user.Id })" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

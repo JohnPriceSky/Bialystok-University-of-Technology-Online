@@ -13,19 +13,5 @@ namespace BUOTOnline.Web.Controllers
         }
 
         public ActionResult Index() => View(_noticeService.GetNotices());
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }

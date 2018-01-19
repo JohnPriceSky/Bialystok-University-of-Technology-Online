@@ -1,27 +1,33 @@
 ﻿@model BUOTOnline.DAL.ViewModels.CategoryViewModel
 
 @{
-    ViewBag.Title = "AddCategory";
+    ViewBag.Title = "Add New Category";
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/adminController");
 }
 
 <h2>AddCategory</h2>
+<div ng-controller="adminController">
+    {{test}}
+    @using (Html.BeginForm("AddCategory", "Admin", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.Name, "Name:")
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", ng_model = "test" })
+        </div>
 
-@using (Html.BeginForm() )
-{
-    <div class="form-group">
-        @Html.LabelFor(m => m.Name, "Name:")
-        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-    </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ParentId, "Parent:")
+            @Html.DropDownListFor(expression: m => m.ParentId, 
+                selectList: new SelectList(Model.Parents, "Id", "Name"), 
+                optionLabel: "No Parent", 
+                htmlAttributes: new { @class = "form-control", ng_model = "parentId", ng_change = "getInheritedAttributes()" })
+        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.ParentId, "Parent:")
-        @Html.DropDownListFor(m => m.ParentId, new SelectList(Model.Parents, "Id", "Name"), "Select", new { @class = "form-control" })
-    </div>
+        @Html.HiddenFor(m => m.AttributeIds, new { ng_value = "{{attrs}}" })
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.AttributeIds, "Atributes:")
-        @Html.DropDownListFor(m => m.AttributeIds, new SelectList(Model.Attributes, "Id", "Name"), "Select", new { @class = "form-control" })
-    </div>
-
-    <input value="Add" type="submit" class="btn btn-success" />
-}
+        <input value="Add" type="submit" class="btn btn-success" />
+    }
+</div>
