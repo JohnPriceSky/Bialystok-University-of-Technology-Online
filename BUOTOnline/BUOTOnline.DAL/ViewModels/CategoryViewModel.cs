@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace BUOTOnline.DAL.ViewModels
 {
+    [JsonObject(NamingStrategyType = typeof(Newtonsoft.Json.Serialization.CamelCaseNamingStrategy))]
     public class CategoryViewModel
     {
         public long Id { get; set; }

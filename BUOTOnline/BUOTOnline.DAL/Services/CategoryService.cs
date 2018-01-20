@@ -63,19 +63,21 @@ namespace BUOTOnline.DAL.Services
 
         public void GetInheritedCategories(long categoryId, ref List<CategoryViewModel> categories)
         {
-            var parenCategory = _buotDb.Category.AsNoTracking()
+            var parentCategory = _buotDb.Category.AsNoTracking()
+                .Where(c => c.Id == categoryId && c.ParentId.HasValue)
+                .Select(c => c.Category2)
                 .Select(c => new CategoryViewModel
                 {
                     Id = c.Id,
                     Name = c.Name,
                     ParentId = c.ParentId
                 })
-                .FirstOrDefault(c => c.Id == categoryId && c.ParentId.HasValue);
+                .FirstOrDefault();
 
-            if (parenCategory != null)
+            if (parentCategory != null)
             {
-                categories.Add(parenCategory);
-                GetInheritedCategories(parenCategory.Id, ref categories);
+                categories.Add(parentCategory);
+                GetInheritedCategories(parentCategory.Id, ref categories);
             }
         }
 

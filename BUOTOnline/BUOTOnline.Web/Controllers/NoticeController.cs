@@ -1,4 +1,5 @@
-﻿using BUOTOnline.DAL.ViewModels;
+﻿using BUOTOnline.DAL.IServices;
+using BUOTOnline.DAL.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,17 @@ namespace BUOTOnline.Web.Controllers
 {
     public class NoticeController : Controller
     {
-        // GET: Notice
+        private readonly INoticeService _noticeService;
+
+        public NoticeController(INoticeService noticeService)
+        {
+            _noticeService = noticeService;
+        }
+
         public ActionResult Index()
         {
             return View();
         }
-
 
         public ActionResult Add()
         {
@@ -24,16 +30,9 @@ namespace BUOTOnline.Web.Controllers
         [HttpPost]
         public ActionResult Add(NoticeViewModel notice)
         {
-            if (ModelState.IsValid)
-            {
-                ViewBag.Msg = $"Title: {notice.Title}, Description: {notice.Description}, Created: {notice.Created}";
-            }
-            else
-            {
-                ViewBag.Msg = "Błędne dane.";
-            }
+            _noticeService.AddNotice(notice);
 
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult AddButton()

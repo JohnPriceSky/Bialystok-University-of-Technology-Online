@@ -1,24 +1,21 @@
 ﻿@model BUOTOnline.DAL.ViewModels.NoticeViewModel
 
 @{
-    ViewBag.Title = "Add";
+    ViewBag.Title = "Add Notice";
 }
 
-<h2>Add</h2>
+@section scripts {
+    @Scripts.Render("~/bundles/addCategoryController");
+}
 
-@using (Html.BeginForm()) 
+<h2>Add Notice</h2>
+
+@using (Html.BeginForm("Add", "Notice", FormMethod.Post, new { id = "Form" }))
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>NoticeViewModel</h4>
-        <hr />
+
+    <div ng-controller="addCategoryController" class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-
-        @*@Html.DropDownListFor(m => m.Text, selectList, "Default label", new { @class = "form-control" })*@
-        @*@Html.DropDownList(model => model.Title, CategoryList, "Select a category")*@
-       
 
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -29,20 +26,72 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.ImageUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ImageUrl, new { htmlAttributes = new { @class = "form-control", ng_model = "imageUrl" } })
+                @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Preview", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <img ng-src="{{imageUrl}}" class="img-responsive" style="height:200px" />
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", Rows = "5" } })
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
 
-      
+        @Html.HiddenFor(m => m.CategoriesIds)
+        @Html.HiddenFor(m => m.Content)
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Add categories</label><br />
+            <div class="form-inline col-md-10">
+                <select ng-model="addedCategory" ng-options="category as category.name for category in categories" class="form-control"></select>
+                <a ng-click="addCategory()" class="btn btn-success btn-sm">Add</a>
+            </div>
+        </div>
+
+        
+
+        <div class="form-group row">
+            <div class="col-md-2"></div>
+            <div ng-if="addedCategories.length > 0" class="col-md-10">
+                <ul>
+                    <li ng-repeat="category in addedCategories">
+                        {{category.name}}
+                        <a ng-click="removeCategory(category)" style="color:red;cursor:pointer;">[X]</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div ng-if="attributes.length > 0" class="form-group">
+            <label class="control-label col-md-2">Attributes</label>
+            <div class="col-md-10">
+                <ul>
+                    <li ng-repeat="attr in attributes">
+                        <p>{{attr.name}}</p>
+                        <input ng-model="attr.value" ng-if="attr.type == 0" type="text" />
+                        <input ng-model="attr.value" ng-if="attr.type == 2" type="number" />
+                    </li>
+                </ul>
+            </div>
+        </div>
+
         <div>
             @ViewBag.Msg
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <a ng-click="submit()" class="btn btn-success">Create</a>
             </div>
         </div>
     </div>
