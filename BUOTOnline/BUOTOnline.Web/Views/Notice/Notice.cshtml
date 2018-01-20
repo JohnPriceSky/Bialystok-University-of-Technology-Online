@@ -1,0 +1,46 @@
+﻿@model BUOTOnline.DAL.ViewModels.NoticeViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/noticeController");
+}
+
+<h2>@Model.Title</h2>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        @{
+            Html.RenderAction("NoticeCategories", "Notice", new { noticeId = Model.Id });
+        }
+        <div class="row">
+            <div class="col-sm-3">
+                <img src="@Model.ImageUrl" class="img-responsive" />
+            </div>
+            <div class="col-sm-9">
+                <h3 style="margin-top: 0px;">@Model.Title</h3>
+                <h6 style="font-style: italic;">Created at @Model.Created by @Model.Owner</h6>
+                <h6>@Model.Description</h6>
+                <ul class="list-inline">
+                    <li>@{ Html.RenderAction("EditButton", "Notice", new { owner = Model.Owner, noticeId = Model.Id }); }</li>
+                    <li>@{ Html.RenderAction("DeleteButton", "Notice", new { owner = Model.Owner, noticeId = Model.Id }); }</li>
+                </ul>
+            </div>
+        </div>
+        <div ng-controller="noticeController" class="col-md-4">
+            @Html.HiddenFor(m => m.Content)
+
+            <div ng-if="attributes.length > 0">
+                <div>
+                    <ul class="list-group">
+                        <li ng-repeat="attr in attributes" class="list-group-item">
+                            <p>{{attr.name}}: {{attr.value}}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

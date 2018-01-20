@@ -17,6 +17,12 @@ namespace BUOTOnline.Web.API
         [HttpGet, Route("api/categories/")]
         public IEnumerable<CategoryViewModel> GetCategories() => _categoryService.GetCategories();
 
+        [HttpGet, Route("api/lowestCategories/")]
+        public IEnumerable<CategoryViewModel> GetLowestCategories() => _categoryService.GetLowestCategories();
+
+        [HttpGet, Route("api/childrenCategories/{categryId}")]
+        public IEnumerable<CategoryViewModel> GetChildrenCategories([FromUri]long categryId) => _categoryService.GetChildrenCategories(categryId);
+
         [HttpGet, Route("api/attributes/")]
         public IEnumerable<AttributeViewModel> GetCategoryAttributes() => _categoryService.GetAttributes();
 

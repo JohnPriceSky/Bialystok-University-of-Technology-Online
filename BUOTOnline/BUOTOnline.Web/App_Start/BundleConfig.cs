@@ -18,6 +18,15 @@ namespace BUOTOnline.Web
             bundles.Add(new ScriptBundle("~/bundles/addCategoryController").Include(
                         "~/Scripts/app/controllers/addCategoryController.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/editCategoryController").Include(
+                        "~/Scripts/app/controllers/editCategoryController.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/noticeController").Include(
+                        "~/Scripts/app/controllers/noticeController.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/searchController").Include(
+                        "~/Scripts/app/controllers/searchController.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/adminController").Include(
                         "~/Scripts/app/controllers/adminController.js"));
 

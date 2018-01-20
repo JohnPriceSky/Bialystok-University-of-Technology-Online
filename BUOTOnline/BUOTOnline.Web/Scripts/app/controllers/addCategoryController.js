@@ -47,9 +47,6 @@
     };
 
     $scope.submit = function () {
-        console.log('submit');
-
-
         var categoriesIds = [];
         for (i = 0; i < $scope.addedCategories.length; i++)
             categoriesIds.push($scope.addedCategories[i].id)

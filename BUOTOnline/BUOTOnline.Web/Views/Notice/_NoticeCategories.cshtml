@@ -1,0 +1,8 @@
+﻿@model System.Collections.Generic.IEnumerable<BUOTOnline.DAL.ViewModels.CategoryViewModel>
+
+<ul class="list-inline">
+    @foreach (var category in Model)
+    {
+        <li>@category.Name</li>
+    }
+</ul>

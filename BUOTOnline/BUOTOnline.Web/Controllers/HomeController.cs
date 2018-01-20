@@ -13,5 +13,12 @@ namespace BUOTOnline.Web.Controllers
         }
 
         public ActionResult Index() => View(_noticeService.GetNotices());
+
+        public ActionResult Category(long categoryId)
+        {
+            var notices = _noticeService.GetNoticesByCategory(categoryId);
+
+            return View(notices);
+        }
     }
 }

@@ -6,6 +6,8 @@ namespace BUOTOnline.DAL.IServices
     public interface ICategoryService
     {
         IEnumerable<CategoryViewModel> GetCategories();
+        IEnumerable<CategoryViewModel> GetLowestCategories();
+        IEnumerable<CategoryViewModel> GetChildrenCategories(long categoryId);
         CategoryViewModel GetCategory(long categoryId);
         IEnumerable<AttributeViewModel> GetAttributes();
         void GetInheritedCategories(long categoryId, ref List<CategoryViewModel> categories);

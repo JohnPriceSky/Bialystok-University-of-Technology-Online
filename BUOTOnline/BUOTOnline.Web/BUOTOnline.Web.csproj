@@ -239,6 +239,9 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\app.js" />
+    <Content Include="Scripts\app\controllers\searchController.js" />
+    <Content Include="Scripts\app\controllers\noticeController.js" />
+    <Content Include="Scripts\app\controllers\editCategoryController.js" />
     <Content Include="Scripts\app\controllers\adminController.js" />
     <Content Include="Scripts\app\controllers\addCategoryController.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -300,6 +303,12 @@
     <Content Include="Views\Admin\UsersManagement.cshtml" />
     <Content Include="Views\Admin\EditUser.cshtml" />
     <Content Include="Views\Admin\EditCategory.cshtml" />
+    <Content Include="Views\Notice\_EditButton.cshtml" />
+    <Content Include="Views\Notice\_NoticeCategories.cshtml" />
+    <Content Include="Views\Notice\Edit.cshtml" />
+    <Content Include="Views\Notice\Notice.cshtml" />
+    <Content Include="Views\Notice\_DeleteButton.cshtml" />
+    <Content Include="Views\Home\Category.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\UsersManagement\" />

@@ -8,6 +8,8 @@ namespace BUOTOnline.DAL.ViewModels
     [JsonObject(NamingStrategyType = typeof(Newtonsoft.Json.Serialization.CamelCaseNamingStrategy))]
     public class NoticeViewModel
     {
+        public long Id { get; set; }
+
         [Display(Name = "Title")]
         [Required]
         public string Title { get; set; }
@@ -25,14 +27,8 @@ namespace BUOTOnline.DAL.ViewModels
         public string CategoriesIds { get; set; }
         public string Content { get; set; }
 
-        //public int[] CategoryId { get; set; }
-        //public MultiSelectList Categories { get; set; }
+        public string Owner { get; set; }
 
-        //public NoticeViewModel()
-        //{
-        //    List<MultiSelectList> categories = new List<MultiSelectList>();
-        //    Categories = new MultiSelectList(categories, "CategoryID", "CategoryName");
-        //}
-
+        public long CurrentCategoryId { get; set; }
     }
 }

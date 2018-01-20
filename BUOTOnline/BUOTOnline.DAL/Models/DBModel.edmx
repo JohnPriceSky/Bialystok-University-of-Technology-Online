@@ -47,6 +47,7 @@
           <Property Name="ImageUrl" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="Content" Type="ntext" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <Association Name="FK_CategoryAttribute_Attribute">
           <End Role="Attribute" Type="Self.Attribute" Multiplicity="1" />
@@ -186,8 +187,9 @@
           <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ImageUrl" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Category" Relationship="BUOTOnlineModel.CategoryNotice" FromRole="Notice" ToRole="Category" />
           <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Category" Relationship="BUOTOnlineModel.CategoryNotice" FromRole="Notice" ToRole="Category" />
         </EntityType>
         <Association Name="FK_ParentIdCategory">
           <End Type="BUOTOnlineModel.Category" Role="Category" Multiplicity="0..1" />
@@ -237,6 +239,7 @@
           <EntitySetMapping Name="Notice">
             <EntityTypeMapping TypeName="BUOTOnlineModel.Notice">
               <MappingFragment StoreEntitySet="Notice">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
                 <ScalarProperty Name="Created" ColumnName="Created" />
                 <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />

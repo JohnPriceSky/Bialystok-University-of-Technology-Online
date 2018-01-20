@@ -28,6 +28,32 @@ namespace BUOTOnline.DAL.Services
                 .ToList();
         }
 
+        public IEnumerable<CategoryViewModel> GetLowestCategories()
+        {
+            return _buotDb.Category.AsNoTracking()
+                .Where(c => !c.ParentId.HasValue)
+                .Select(c => new CategoryViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    ParentId = c.ParentId
+                })
+                .ToList();
+        }
+
+        public IEnumerable<CategoryViewModel> GetChildrenCategories(long categoryId)
+        {
+            return _buotDb.Category.AsNoTracking()
+                .Where(c => c.ParentId == categoryId)
+                .Select(c => new CategoryViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    ParentId = c.ParentId
+                })
+                .ToList();
+        }
+
         public IEnumerable<AttributeViewModel> GetAttributes()
         {
             return _buotDb.Attribute.AsNoTracking()

@@ -6,6 +6,11 @@ namespace BUOTOnline.DAL.IServices
     public interface INoticeService
     {
         IEnumerable<NoticeViewModel> GetNotices();
-        void AddNotice(NoticeViewModel notice);
+        NoticeViewModel GetNotice(long noticeId);
+        IEnumerable<CategoryViewModel> GetNoticeCategories(long noticeId);
+        IEnumerable<NoticeViewModel> GetNoticesByCategory(long categoryId);
+        void AddNotice(NoticeViewModel notice, string userId);
+        void EditNotice(NoticeViewModel notice);
+        void DeleteNotice(long noticeId);
     }
 }
