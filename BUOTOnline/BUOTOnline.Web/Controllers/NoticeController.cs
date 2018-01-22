@@ -75,7 +75,7 @@ namespace BUOTOnline.Web.Controllers
 
         public ActionResult EditButton(string owner, string noticeId)
         {
-            if (owner != null && owner.Equals(User.Identity.Name))
+            if ((owner != null && owner.Equals(User.Identity.Name)) || User.IsInRole("Admin"))
                 return PartialView("~/Views/Notice/_EditButton.cshtml", noticeId);
             else
                 return Content(string.Empty);
@@ -89,7 +89,7 @@ namespace BUOTOnline.Web.Controllers
 
         public ActionResult DeleteButton(string owner, string noticeId)
         {
-            if (owner != null && owner.Equals(User.Identity.Name))
+            if ((owner != null && owner.Equals(User.Identity.Name)) || User.IsInRole("Admin"))
                 return PartialView("~/Views/Notice/_DeleteButton.cshtml", noticeId);
             else
                 return Content(string.Empty);

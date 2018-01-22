@@ -24,6 +24,8 @@ namespace BUOTOnline.Web.Controllers
 
         public ActionResult Index() => View();
 
+        public ActionResult Dictionaries() => View();
+
         public ActionResult Categories() => View(_categoryService.GetCategories());
 
         public ActionResult Category(long id)
@@ -152,6 +154,16 @@ namespace BUOTOnline.Web.Controllers
                 _applicationDbContext.SaveChanges();
 
             return RedirectToAction("UsersManagement");
+        }
+
+        public ActionResult SizeDict()
+        {
+            return PartialView("~/Views/Admin/_SizeDict.cshtml");
+        }
+
+        public ActionResult StateDict()
+        {
+            return PartialView("~/Views/Admin/_StateDict.cshtml");
         }
     }
 }

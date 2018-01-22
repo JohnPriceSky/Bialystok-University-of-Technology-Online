@@ -1,47 +1,26 @@
 ﻿@model System.Collections.Generic.IEnumerable<BUOTOnline.DAL.ViewModels.NoticeViewModel>
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "BUOT Online";
 }
 
-<div class="jumbotron">
+@section scripts {
+    @Scripts.Render("~/bundles/searchController");
+}
+
+<div ng-controller="searchController" ng-init="getLowestCategories()" class="jumbotron">
     <div class="row">
-        <!-- Category dropdown -->
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="sel1">Category list:</label>
-                <select class="form-control" id="categoryList">
-                    <option value="moto">Motoryzacja</option>
-                    <option value="electronics">Elektronika</option>
-                    <option value="job">Praca</option>
-                </select>
-            </div>
-        </div>
-        <!--
-<div ng-controller="homeController">
-    <input ng-model="test" /> {{test}}
-</div>
-            -->
+        @using (Html.BeginForm("Category", "Home", FormMethod.Get, new { id = "CategoryForm" }))
+        {
+            @Html.Hidden("categoryId")
 
-        <!-- tags -->
-        <div class="col-md-4">
-            Tags here
-        </div>
-
-        <!-- search input -->
-        <div class="col-md-4">
-            <form action="" class="navbar-form navbar-right">
-                <div class="input-group">
-                    <input type="Search" placeholder="Search..." class="form-control" />
-                    <div class="input-group-btn">
-                        <button class="btn btn-success">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="sel1">Category list:</label>
+                    <select ng-change="select()" ng-model="chosenCategory" ng-options="category as category.name for category in categories" class="form-control"></select>
                 </div>
-            </form>
-        </div>
+            </div>
+        }
     </div>
-    
 </div>
 
 
@@ -49,14 +28,20 @@
 {
     <div class="panel panel-default">
         <div class="panel-body">
+            @{
+                Html.RenderAction("NoticeCategories", "Notice", new { noticeId = notice.Id });
+            }
             <div class="row">
                 <div class="col-sm-3">
                     <img src="@notice.ImageUrl" class="img-responsive" />
                 </div>
                 <div class="col-sm-9">
-                    <h3 style="margin-top: 0px;">@notice.Title</h3>
-                    <h6 style="font-style: italic;">@notice.Created</h6>
+                    <h3 style="margin-top: 0px;">@Html.ActionLink(notice.Title, "Notice", controllerName: "Notice", routeValues: new { id = notice.Id }, htmlAttributes: null)</h3>
+                    <h6 style="font-style: italic;">Created at @notice.Created by @notice.Owner</h6>
                     <h6>@notice.Description</h6>
+                    @{
+                        Html.RenderAction("EditButton", "Notice", new { owner = notice.Owner, noticeId = notice.Id });
+                    }
                 </div>
             </div>
         </div>
