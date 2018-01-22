@@ -1,4 +1,4 @@
-﻿app.controller('addCategoryController', function ($scope, $http) {
+﻿app.controller('addCategoryController', ['$scope', '$http', function ($scope, $http) {
     $scope.imageUrl = 'https://www.image.ie/images/no-image.png';
     $scope.addedCategories = [];
     $scope.attributes = [];
@@ -77,4 +77,4 @@
 
         $('#Form').submit();
     }
-});
+}]);

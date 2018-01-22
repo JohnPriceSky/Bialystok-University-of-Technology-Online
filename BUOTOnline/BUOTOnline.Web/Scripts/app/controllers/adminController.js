@@ -1,4 +1,4 @@
-﻿app.controller('adminController', function ($scope, $http) {
+﻿app.controller('adminController', ['$scope', '$http', function ($scope, $http) {
 
     $http.get('/api/attributes').then(function (result) {
         $scope.attributes = result.data;
@@ -76,4 +76,4 @@
 
     $scope.addedAttrs = [];
     $scope.attrs = [];
-});
+}]);

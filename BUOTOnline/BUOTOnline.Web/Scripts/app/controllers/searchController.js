@@ -1,4 +1,4 @@
-﻿app.controller('searchController', function ($scope, $http) {
+﻿app.controller('searchController', ['$scope', '$http', function ($scope, $http) {
     $scope.getLowestCategories = function () {
         $http.get('/api/lowestCategories').then(function (result) {
             $scope.categories = result.data;
@@ -18,4 +18,4 @@
             $('#CategoryForm').submit();
         }
     };
-});
+}]);

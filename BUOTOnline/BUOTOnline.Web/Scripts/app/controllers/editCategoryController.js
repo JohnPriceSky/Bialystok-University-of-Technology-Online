@@ -1,4 +1,4 @@
-﻿app.controller('editCategoryController', function ($scope, $http) {
+﻿app.controller('editCategoryController', ['$scope', '$http', function ($scope, $http) {
     $scope.attributes = JSON.parse($('#Content').val());
 
     $scope.states = ['new', 'old'];
@@ -18,4 +18,4 @@
 
         $('#Form').submit();
     }
-});
+}]);
