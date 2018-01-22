@@ -57,7 +57,12 @@
                     <li ng-repeat="attr in attributes">
                         <p>{{attr.name}}</p>
                         <input ng-model="attr.value" ng-if="attr.type == 0" type="text" />
+                        <input ng-model="attr.value" ng-if="attr.type == 0" type="text" />
                         <input ng-model="attr.value" ng-if="attr.type == 2" type="number" />
+                        <input ng-model="attr.value" ng-if="attr.type == 3" type="number" />
+                        <input ng-model="attr.value" ng-if="attr.type == 4" type="checkbox" />
+                        <select ng-init="getStates()" ng-model="attr.value" ng-if="attr.type == 5" ng-options="state as state for state in states" class="form-control"></select>
+                        <select ng-init="getSizes()" ng-model="attr.value" ng-if="attr.type == 6" ng-options="size as size for size in sizes" class="form-control"></select>
                     </li>
                 </ul>
             </div>

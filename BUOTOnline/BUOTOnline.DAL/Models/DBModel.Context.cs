@@ -28,5 +28,7 @@ namespace BUOTOnline.DAL.Models
         public virtual DbSet<Attribute> Attribute { get; set; }
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Notice> Notice { get; set; }
+        public virtual DbSet<State> State { get; set; }
+        public virtual DbSet<Size> Size { get; set; }
     }
 }

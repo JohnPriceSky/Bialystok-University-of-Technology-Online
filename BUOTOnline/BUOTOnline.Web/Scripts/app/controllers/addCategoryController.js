@@ -7,6 +7,18 @@
         $scope.categories = result.data;
     });
 
+    $scope.states = ['new', 'old'];
+
+    $scope.sizes = ['s', 'm', 'l'];
+
+    $http.get('/api/states').then(function (result) {
+        $scope.states = result.data;
+    });
+
+    $http.get('/api/sizes').then(function (result) {
+        $scope.sizes = result.data;
+    });
+
     function getAttributes(categoryId) {
         $http.get('/api/category/attributes/' + categoryId).then(function (result) {
             for (i = 0; i < result.data.length; i++) {

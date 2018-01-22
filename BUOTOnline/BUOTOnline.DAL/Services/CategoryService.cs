@@ -125,6 +125,44 @@ namespace BUOTOnline.DAL.Services
                 });
         }
 
+        public IEnumerable<string> GetStates()
+        {
+            return _buotDb.State.AsNoTracking().Select(s => s.Value).ToList();
+        }
+
+        public void AddState(string state)
+        {
+            _buotDb.State.Add(new State { Value = state });
+            _buotDb.SaveChanges();
+        }
+
+        public void DeleteState(string state)
+        {
+            var dbState = _buotDb.State.FirstOrDefault(s => s.Value.Equals(state));
+
+            _buotDb.State.Remove(dbState);
+            _buotDb.SaveChanges();
+        }
+
+        public IEnumerable<string> GetSizes()
+        {
+            return _buotDb.Size.AsNoTracking().Select(s => s.Value).ToList();
+        }
+
+        public void AddSize(string size)
+        {
+            _buotDb.Size.Add(new Size { Value = size });
+            _buotDb.SaveChanges();
+        }
+
+        public void DeleteSize(string size)
+        {
+            var dbSize = _buotDb.Size.FirstOrDefault(s => s.Value.Equals(size));
+
+            _buotDb.Size.Remove(dbSize);
+            _buotDb.SaveChanges();
+        }
+
         public void AddCategory(CategoryViewModel category)
         {
             var attributesIds = GetAttributesIds(category.AttributeIds);

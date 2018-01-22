@@ -1,1 +1,19 @@
-﻿<h3>State</h3>
+﻿@model System.Collections.Generic.IEnumerable<string>
+
+<h3>State</h3>
+
+<ul class="list-group">
+    @foreach (var state in Model)
+    {
+        <li class="list-group-item">
+            <p>@state <a href="@Url.Action("RemoveState", "Admin", new { state = state })" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-minus-sign"></i></a></p>
+        </li>
+    }
+</ul>
+@using (Html.BeginForm("AddState", "Admin", FormMethod.Post))
+{
+    <div class="form-inline">
+        @Html.TextBox("state", string.Empty, new { @class = "form-control" })
+        <input type="submit" value="Add" class="btn btn-success" />
+    </div>
+}

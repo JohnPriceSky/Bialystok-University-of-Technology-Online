@@ -1,1 +1,19 @@
-﻿<h3>Size</h3>
+﻿@model System.Collections.Generic.IEnumerable<string>
+
+<h3>Size</h3>
+
+<ul class="list-group">
+    @foreach (var size in Model)
+    {
+        <li class="list-group-item">
+            <p>@size <a href="@Url.Action("RemoveSize", "Admin", new { size = size })" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-minus-sign"></i></a></p>
+        </li>
+    }
+</ul>
+@using (Html.BeginForm("AddSize", "Admin", FormMethod.Post))
+{
+    <div class="form-inline">
+        @Html.TextBox("size", string.Empty, new { @class = "form-control" })
+        <input type="submit" value="Add" class="btn btn-success" />
+    </div>
+}

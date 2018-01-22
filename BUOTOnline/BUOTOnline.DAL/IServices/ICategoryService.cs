@@ -15,5 +15,11 @@ namespace BUOTOnline.DAL.IServices
         void AddCategory(CategoryViewModel category);
         void EditCategory(CategoryViewModel category);
         void DeleteCategory(long categoryId);
+        IEnumerable<string> GetStates();
+        IEnumerable<string> GetSizes();
+        void AddState(string state);
+        void AddSize(string size);
+        void DeleteState(string state);
+        void DeleteSize(string size);
     }
 }

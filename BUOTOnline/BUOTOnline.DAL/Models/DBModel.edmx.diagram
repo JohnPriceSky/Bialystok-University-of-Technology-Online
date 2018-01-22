@@ -11,7 +11,9 @@
         <AssociationConnector Association="BUOTOnlineModel.FK_ParentIdCategory" />
         <AssociationConnector Association="BUOTOnlineModel.CategoryAttribute" />
         <AssociationConnector Association="BUOTOnlineModel.CategoryNotice" />
-      </Diagram>
+        <EntityTypeShape EntityType="BUOTOnlineModel.Size" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="BUOTOnlineModel.State" Width="1.5" PointX="2.75" PointY="4.75" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

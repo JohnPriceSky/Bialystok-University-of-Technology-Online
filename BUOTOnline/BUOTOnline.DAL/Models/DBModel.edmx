@@ -49,6 +49,20 @@
           <Property Name="Content" Type="ntext" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" />
         </EntityType>
+        <EntityType Name="Size">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
         <Association Name="FK_CategoryAttribute_Attribute">
           <End Role="Attribute" Type="Self.Attribute" Multiplicity="1" />
           <End Role="CategoryAttribute" Type="Self.CategoryAttribute" Multiplicity="*" />
@@ -115,6 +129,8 @@
           <EntitySet Name="CategoryAttribute" EntityType="Self.CategoryAttribute" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CategoryNotice" EntityType="Self.CategoryNotice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notice" EntityType="Self.Notice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Size" EntityType="Self.Size" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_CategoryAttribute_Attribute" Association="Self.FK_CategoryAttribute_Attribute">
             <End Role="Attribute" EntitySet="Attribute" />
             <End Role="CategoryAttribute" EntitySet="CategoryAttribute" />
@@ -156,7 +172,9 @@
             <End Role="Category" EntitySet="Category" />
             <End Role="Notice" EntitySet="Notice" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="Size" EntityType="BUOTOnlineModel.Size" />
+          <EntitySet Name="State" EntityType="BUOTOnlineModel.State" />
+          </EntityContainer>
         <EntityType Name="Attribute">
           <Key>
             <PropertyRef Name="Id" />
@@ -212,7 +230,21 @@
           <End Type="BUOTOnlineModel.Notice" Role="Notice" Multiplicity="*" />
         </Association>
         <EnumType Name="AttributeType" UnderlyingType="Byte" a:ExternalTypeName="BUOTOnline.DAL.AttributeType" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-      </Schema>
+        <EntityType Name="Size">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -265,7 +297,23 @@
               <ScalarProperty Name="Id" ColumnName="CategoryId" />
             </EndProperty>
           </AssociationSetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="Size">
+            <EntityTypeMapping TypeName="BUOTOnlineModel.Size">
+              <MappingFragment StoreEntitySet="Size">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="State">
+            <EntityTypeMapping TypeName="BUOTOnlineModel.State">
+              <MappingFragment StoreEntitySet="State">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

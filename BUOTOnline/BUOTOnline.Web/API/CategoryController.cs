@@ -43,5 +43,11 @@ namespace BUOTOnline.Web.API
 
             return result;
         }
+
+        [HttpGet, Route("api/states/")]
+        public IEnumerable<string> GetStates() => _categoryService.GetStates();
+
+        [HttpGet, Route("api/sizes/")]
+        public IEnumerable<string> GetSizes() => _categoryService.GetSizes();
     }
 }

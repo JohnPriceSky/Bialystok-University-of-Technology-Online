@@ -158,12 +158,42 @@ namespace BUOTOnline.Web.Controllers
 
         public ActionResult SizeDict()
         {
-            return PartialView("~/Views/Admin/_SizeDict.cshtml");
+            return PartialView("~/Views/Admin/_SizeDict.cshtml", _categoryService.GetSizes());
         }
 
         public ActionResult StateDict()
         {
-            return PartialView("~/Views/Admin/_StateDict.cshtml");
+            return PartialView("~/Views/Admin/_StateDict.cshtml", _categoryService.GetStates());
+        }
+
+        [HttpPost]
+        public ActionResult AddSize(string size)
+        {
+            _categoryService.AddSize(size);
+
+            return RedirectToAction("Dictionaries");
+        }
+
+        [HttpPost]
+        public ActionResult AddState(string state)
+        {
+            _categoryService.AddState(state);
+
+            return RedirectToAction("Dictionaries");
+        }
+
+        public ActionResult RemoveSize(string size)
+        {
+            _categoryService.DeleteSize(size);
+
+            return RedirectToAction("Dictionaries");
+        }
+
+        public ActionResult RemoveState(string state)
+        {
+            _categoryService.DeleteState(state);
+
+            return RedirectToAction("Dictionaries");
         }
     }
 }
